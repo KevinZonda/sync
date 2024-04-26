@@ -14,7 +14,8 @@ func (b Base) runCmd(name string, args ...string) error {
 		execCmd.Dir = b.Location
 	}
 	err := execCmd.Run()
-	fmt.Println("COV", execCmd.String())
+	o, _ := execCmd.Output()
+	fmt.Println("COV", string(o))
 
 	return err
 }
