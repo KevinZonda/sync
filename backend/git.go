@@ -33,6 +33,7 @@ func (g *GitBackend) Push(force bool) error {
 
 func (g *GitBackend) needAddOrCommit() bool {
 	content, _ := g.cmdStr("git", "status", "--porcelain")
+	content = strings.TrimSpace(content)
 	return content != ""
 }
 
