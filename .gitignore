@@ -1,0 +1,11 @@
+.idea/
+
+bin/
+out/
+build/
+vendor/
+
+*.exe
+*.exe~
+*.dll
+*.so
