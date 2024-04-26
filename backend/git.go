@@ -28,7 +28,8 @@ func (g *GitBackend) Push(force bool) error {
 
 func (g *GitBackend) needPush() bool {
 	local, _ := g.cmdStr("git", "rev-parse", "HEAD")
-	remote, _ := g.cmdStr("git", "rev-parse", "@{u}")
+	remote, err := g.cmdStr("git", "rev-parse", "@{u}")
+	fmt.Println(err)
 	local = strings.TrimSpace(local)
 	remote = strings.TrimSpace(remote)
 	fmt.Println("Checking git hash: ", local, remote)
