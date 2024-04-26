@@ -20,6 +20,7 @@ func (g *GitBackend) Push(force bool) error {
 	if !g.needPush() {
 		return nil
 	}
+	fmt.Println("Need push")
 	if force {
 		return g.runCmd("git", "push", "--force")
 	}
@@ -28,8 +29,7 @@ func (g *GitBackend) Push(force bool) error {
 
 func (g *GitBackend) needPush() bool {
 	local, _ := g.cmdStr("git", "rev-parse", "HEAD")
-	remote, err := g.cmdStr("git", "rev-parse", "@{u}")
-	fmt.Println(err)
+	remote, _ := g.cmdStr("git", "rev-parse", "@{u}")
 	local = strings.TrimSpace(local)
 	remote = strings.TrimSpace(remote)
 	fmt.Println("Checking git hash: ", local, remote)
