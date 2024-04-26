@@ -18,3 +18,13 @@ func (b Base) runCmd(name string, args ...string) error {
 type Base struct {
 	Location string
 }
+
+func (b Base) cmdStr(name string, args ...string) (string, error) {
+	execCmd := exec.Command(name, args...)
+	if b.Location != "" {
+		execCmd.Dir = b.Location
+	}
+	execCmd.Run()
+	bs, err := execCmd.Output()
+	return string(bs), err
+}
