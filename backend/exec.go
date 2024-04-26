@@ -1,6 +1,7 @@
 package backend
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 )
@@ -12,7 +13,10 @@ func (b Base) runCmd(name string, args ...string) error {
 	if b.Location != "" {
 		execCmd.Dir = b.Location
 	}
-	return execCmd.Run()
+	err := execCmd.Run()
+	fmt.Println("COV", execCmd.String())
+
+	return err
 }
 
 type Base struct {
