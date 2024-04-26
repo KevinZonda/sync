@@ -5,6 +5,7 @@ import (
 	"github.com/KevinZonda/GoX/pkg/iox"
 	"github.com/KevinZonda/sync/node"
 	"github.com/KevinZonda/sync/text"
+	"github.com/hjson/hjson-go/v4"
 	"os"
 )
 
@@ -22,9 +23,11 @@ func main() {
 		fmt.Println("no valid config file")
 		os.Exit(1)
 	}
-	c := node.SlaveConfig{
-		Strategy: node.Periodic,
-		Interval: "3s",
+	var c node.SlaveConfig
+	err = hjson.Unmarshal([]byte(txt), &c)
+	if err != nil {
+		panic(err)
 	}
+	c.Strategy = node.Periodic
 	c.Run()
 }
