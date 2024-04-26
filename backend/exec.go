@@ -24,6 +24,6 @@ func (b Base) cmdStr(name string, args ...string) (string, error) {
 	if b.Location != "" {
 		execCmd.Dir = b.Location
 	}
-	bs, err := execCmd.Output()
+	bs, err := execCmd.CombinedOutput()
 	return string(bs), err
 }

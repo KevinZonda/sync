@@ -15,6 +15,10 @@ func (g *GitBackend) PullToHead() error {
 }
 
 func (g *GitBackend) Push(force bool) error {
+	if !g.needAddOrCommit() {
+		fmt.Println("Nothing to do")
+		return nil
+	}
 	g.runCmd("git", "add", ".")
 	g.runCmd("git", "commit", "-m", common.NamingCommit())
 	if !g.needPush() {
@@ -25,6 +29,11 @@ func (g *GitBackend) Push(force bool) error {
 		return g.runCmd("git", "push", "--force")
 	}
 	return g.runCmd("git", "push")
+}
+
+func (g *GitBackend) needAddOrCommit() bool {
+	content, _ := g.cmdStr("git", "status", "--porcelain")
+	return content != ""
 }
 
 func (g *GitBackend) needPush() bool {
