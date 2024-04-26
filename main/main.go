@@ -10,6 +10,7 @@ import (
 )
 
 func main() {
+	fmt.Println(text.Info())
 	txt := ""
 	var err error
 	for _, v := range text.SYNC_SLAVE_FILE {

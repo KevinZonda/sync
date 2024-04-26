@@ -20,3 +20,7 @@ func ConfigPath(file ...string) string {
 	}
 	return path.Join(append(ds, file...)...)
 }
+
+func Info() string {
+	return NAME + " - " + VERSION + " by " + AUTHOR
+}
