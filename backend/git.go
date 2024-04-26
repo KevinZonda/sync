@@ -11,6 +11,8 @@ func (g *GitBackend) PullToHead() error {
 }
 
 func (g *GitBackend) Push(force bool) error {
+	g.runCmd("git", "add", ".")
+	g.runCmd("git", "commit", "-m", common.NamingCommit())
 	if force {
 		return g.runCmd("git", "push", "--force")
 	}

@@ -16,7 +16,7 @@ func (s *Slave) ReportToMaster() {
 
 type SlaveConfig struct {
 	Strategy Strategy
-	Minutes  int
+	Minutes  time.Duration
 }
 
 type Strategy string
@@ -34,7 +34,8 @@ func (c SlaveConfig) Run() {
 	b.PullToHead()
 	for {
 		select {
-		case <-time.After(time.Duration(c.Minutes) * time.Minute):
+		case <-time.After(c.Minutes):
+			fmt.Println("Pushing")
 			b.Push(false)
 		}
 	}

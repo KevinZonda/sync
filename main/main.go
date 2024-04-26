@@ -6,6 +6,7 @@ import (
 	"github.com/KevinZonda/sync/node"
 	"github.com/KevinZonda/sync/text"
 	"os"
+	"time"
 )
 
 func main() {
@@ -23,7 +24,7 @@ func main() {
 	}
 	c := node.SlaveConfig{
 		Strategy: node.Periodic,
-		Minutes:  5,
+		Minutes:  10 * time.Second,
 	}
 	c.Run()
 }
